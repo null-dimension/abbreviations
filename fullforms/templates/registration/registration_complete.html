@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}
+Registration Complete || {{ block.super }}
+{% endblock title %}
+{% block content %}
+<h1>Registration Complege</h1>
+<p>Your account has been registred!</p>
+<a href="{% url 'fullforms' %}">Return</a>
+{% endblock content %}

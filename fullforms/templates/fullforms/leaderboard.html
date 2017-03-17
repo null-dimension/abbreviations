@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}
+    Leaderboard - {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+
+<h1>Leaderboard</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in usr %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url 'user_profile' u.username %}">{{ u.username }}</a></td>
+                    <td>{{ u.points }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock content %}

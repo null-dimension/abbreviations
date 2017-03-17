@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'fullforms/style.css' %}">
+<h1>Hello, Welcome to the world of Full Forms!</h1>
+<br>
+
+    <table>
+        <tr>
+            <th>
+                No.
+            </th>
+            <th>
+                Short Forms
+            </th>
+
+            <th>
+                Full Forms
+            </th>
+        </tr>
+        {% for item in ff %}
+            <tr>
+                <td>
+                    {{ forloop.counter }}.
+                </td>
+                <td>
+                    {{ item.shortForm }}
+                </td>
+
+                <td>
+                    {{ item.fullForm }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>

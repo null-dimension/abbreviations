@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+    {% if user.is_authenticated %}
+        Add a full form - {{ block.super }}
+    {% else %}
+        Page Not Found
+    {% endif %}
+{% endblock title %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+      <h1>Add a full form</h1>
+      <form role="form" action="" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" value="Submit">
+      </form>
+    {% else %}
+        <h2>The page you're looking for doesn't exist.</h2>
+    {% endif %}
+{% endblock content %}

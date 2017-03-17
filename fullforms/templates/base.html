@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+
+    <title>
+        {% block title %}
+        Full Forms || The PC Studio
+        {% endblock title %}
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src=" {% static 'fullforms/js/search.js' %}"></script>
+
+</head>
+<body>
+{% block nav %}
+
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+    <buton class="navbar-toggler navbar-toggler-right bg-inverse" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle Navigation">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </buton>
+    <a class="navbar-brand" href="{% url 'fullforms' %}">Full Forms</a>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% if request.resolver_match.url_name == 'fullforms' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'fullforms' %}">
+                    Home <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item {% if request.resolver_match.url_name == 'user_leaderboard' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'user_leaderboard' %}">
+                    Leaderboard
+                </a>
+            </li>
+
+        </ul>
+
+        <ul class="navbar-nav navbar-right">
+            {% if not user.is_authenticated %}
+            <li class="nav-item {% if request.resolver_match.url_name == 'registration_register' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'registration_register' %}">
+                    <i class="fa fa-user" aria-hidden="true"></i>&nbsp;Sign Up
+                </a>
+            </li>
+             <li class="nav-item {% if request.resolver_match.url_name == 'auth_login' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'auth_login' %}">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Login
+                </a>
+             </li>
+            {% else %}
+            <li class="nav-item {% if request.resolver_match.url_name == 'registration_add_fullform' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'registration_add_fullform' %}">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add
+                </a>
+             </li>
+
+            <li class="nav-item {% if request.resolver_match.url_name == 'user_profile' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'user_profile' uname=user.username %}">
+                    Hello, &nbsp;<i class="fa fa-user" aria-hidden="true"></i>&nbsp;{{ user.username }}
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="{% url 'auth_logout' %}">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout
+                </a>
+             </li>
+
+            {% endif %}
+
+        </ul>
+    </div>
+</nav>
+
+{% endblock nav %}
+
+<!-- Old Code --
+
+{% if user.is_authenticated %}
+<li>
+    Hello, {{ user.username }}
+    <a href="{% url 'auth_logout' %}">
+        Logout?
+    </a>
+</li>
+{% else %}
+<li>
+    <a href="{% url 'auth_login' %}">
+        Login
+    </a>
+</li>
+<li>
+    <a href="{% url 'registration_register' %}">
+        Register
+    </a>
+</li>
+{% endif %}
+-->
+<div class="container-fluid">
+{% block content %}
+
+{% endblock content %}
+</div>
+</body>
+</html>

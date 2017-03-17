@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid" style="padding:0">
+    <p>
+        <blockquote class="blockquote" >
+            Learn full forms. Knowledge is power!
+            <footer class="blockquote-footer">
+                The PC Studio
+            </footer>
+        </blockquote>
+    </p>
+
+    <div class="col-md-4" style="padding:0px">
+
+        <div class="input-group">
+
+              <input type="text" class="form-control" placeholder="Search short form..." id="textBox">
+              <span class="input-group-btn">
+                <a href="#" id="bSearch"><button  class="btn btn-secondary" type="button" onclick="move()" >Go!</button></a>
+              </span>
+        </div>
+
+        <p id="searchMsg" class="text-danger"></p>
+    </div>
+	<table class="table table-striped">
+		<thead class="thead-default">
+			<tr>
+                <th>
+                    #
+                </th>
+				<th>
+					Short Form
+				</th>
+				<th>
+					Full Form
+				</th>
+			</tr>
+		
+		</thead>
+		<tbody>
+
+            {% for item in ff %}
+			<tr class="bg-faded">
+                <td scope="row">
+                    {{ forloop.counter }}
+                </td>
+				<td id="{{item.shortForm}}">
+					{{ item.shortForm }}
+				</td>
+				<td>
+					{{ item.fullForm }}
+				</td>
+			</tr>
+            {% endfor %}
+		</tbody>
+	</table>
+
+    <footer class="footer" style="text-align: center" id="test">
+        The PC Studio 2017 | All rights reserved
+    </footer>
+</div>
+
+{% endblock content %}

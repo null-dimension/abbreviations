@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+Profile || {{ block.super }}
+{% endblock title %}
+{% block content %}
+    {% if isExists %}
+
+        <div class="row">
+
+            <div class="col-md-4" style="">
+              <!-- Content -->
+                <br>
+                <img class="card-img-top" src="{% static 'fullforms/img/xLG.png' %}" alt="Profile Picture" height="200" width="200">
+                <h4 class="card-title">Profile</h4>
+                <h6 class="card-subtitle mb-2 text-muted">{{ username }}</h6>
+            </div>
+
+             <div class="col-md-8" style="">
+              <!-- Content -->
+                <br>
+                <h4 class="card-title">Full forms by {{ username }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted"></h6>
+                      <hr>
+                      {% if ff %}
+                          <table class="table table-striped">
+                                <thead class="thead-default">
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Short Form
+                                        </th>
+                                        <th>
+                                            Full Form
+                                        </th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+
+                                    {% for item in ff %}
+
+                                        <tr class="bg-faded">
+                                            <td scope="row">
+                                                {{ forloop.counter }}
+                                            </td>
+                                            <td id="{{item.shortForm}}">
+                                                {{ item.shortForm }}
+                                            </td>
+                                            <td>
+                                                {{ item.fullForm }}
+                                            </td>
+                                        </tr>
+
+                                    {% endfor %}
+                                </tbody>
+                          </table>
+                      {% else %}
+                          <h6>No full forms yet...</h6>
+                      {% endif %}
+            </div>
+        </div>
+    {% else %}
+         <h2>User Not Found!</h2>
+    {% endif %}
+{% endblock content %}
